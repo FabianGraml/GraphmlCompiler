@@ -51,6 +51,7 @@ public final class ElectionUtil {
                     if (candidate.getValue().equals(winner.getValue())) {
                         result = "draw";
                         break;
+
                     }
                 }
             }
