@@ -17,12 +17,11 @@ public class Parser {
         Document doc = dBuilder.parse(new File(filename));
         NodeList nodes = doc.getElementsByTagName("node");
         for (int i = 0; i < nodes.getLength(); i++) {
-            //System.out.println(((Element) nodes.item(i)).getElementsByTagName("y:NodeLabel").item(0).getTextContent() + i);
 
         }
         NodeList edges = doc.getElementsByTagName("edge");
         for (int i = 0; i < nodes.getLength(); i++) {
-            //System.out.println(((Element) nodes.item(i)).getElementsByTagName("y:NodeLabel").item(0).getTextContent());
+            System.out.println(((Element) nodes.item(i)).getElementsByTagName("y:NodeLabel").item(0).getTextContent());
             String source = (((Element) edges.item(i)).getAttribute("source"));
             String target = (((Element) edges.item(i)).getAttribute("target"));
             String[] sourceSplit = source.split("::");
