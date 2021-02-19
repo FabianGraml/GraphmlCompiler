@@ -31,32 +31,26 @@ public final class ElectionUtil {
                 }
 
             }
-
             Map.Entry<String, Integer> winner = null;
             for (Map.Entry<String, Integer> candidate : candidates.entrySet()) {
                 if (winner != null) {
                     if (candidate.getValue() > winner.getValue()) {
                         winner = candidate;
                     }
-                }
-                else {
+                } else {
                     winner = candidate;
                 }
             }
-            
             result = winner.getKey();
-            
             for (Map.Entry<String, Integer> candidate : candidates.entrySet()) {
                 if (!candidate.equals(winner)) {
                     if (candidate.getValue().equals(winner.getValue())) {
                         result = "draw";
                         break;
-
                     }
                 }
             }
         }
-        
         return result;
     }
     
