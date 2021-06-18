@@ -1,6 +1,6 @@
 package net.htlgrieskirchen.aud4.election;
 
-public class Klasse {
+public class Clazz {
     String methodName;
 
     public String getMethodName() {

@@ -9,6 +9,12 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
 
 public class Parser {
     public void read(String filename) throws IOException, ParserConfigurationException, SAXException {
@@ -20,14 +26,18 @@ public class Parser {
 
         }
         NodeList edges = doc.getElementsByTagName("edge");
+        Files.delete(Paths.get("src/net/htlgrieskirchen/aud4/election/edges.txt"));
+        Files.createFile(Paths.get("src/net/htlgrieskirchen/aud4/election/edges.txt"));
         for (int i = 0; i < nodes.getLength(); i++) {
-            System.out.println(((Element) nodes.item(i)).getElementsByTagName("y:NodeLabel").item(0).getTextContent());
+            String output = ((Element) nodes.item(i)).getElementsByTagName("y:NodeLabel").item(0).getTextContent();
+            System.out.println(output);
+            Files.write( Paths.get("src/net/htlgrieskirchen/aud4/election/edges.txt"), (output+"\n").getBytes(), StandardOpenOption.APPEND);
             String source = (((Element) edges.item(i)).getAttribute("source"));
             String target = (((Element) edges.item(i)).getAttribute("target"));
             String[] sourceSplit = source.split("::");
             source = sourceSplit[1].replace("n", "");
 
-
         }
+
     }
 }

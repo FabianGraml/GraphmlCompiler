@@ -9,6 +9,6 @@ public class Main {
     public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {
         Parser parser = new Parser();
         parser.read("src/net/htlgrieskirchen/aud4/election/ElectionUtilBasic.graphml");
-        parser.paste();
+        //parser.paste();
     }
 }
