@@ -1,7 +1,5 @@
 package net.htlgrieskirchen.aud4.election;
 
-import net.htlgrieskirchen.aud4.election.Graph.Edge;
-import net.htlgrieskirchen.aud4.election.Graph.Node;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -25,7 +23,7 @@ public class GraphmlParser {
         List<Edge> edges = readEdges(filename);
 
         edges.forEach(edge -> {
-            Node nodeFrom = nodes.stream().filter(node -> node.getId().equals(edge.getFrom())).findFirst().orElse(null);
+            Node nodeFrom = nodes.stream().filter(node -> node.getNodeId().equals(edge.getEdgeFrom())).findFirst().orElse(null);
 
             List<Edge> nodeEdges = codeList.get(nodeFrom);
             if(nodeFrom != null) {
@@ -56,9 +54,7 @@ public class GraphmlParser {
             for (int i = 0; i < graphEdges.getLength(); i++) {
                 String source = ((Element) graphEdges.item(i)).getAttribute("source");
                 String target = ((Element) graphEdges.item(i)).getAttribute("target");
-                String arrow = ((Element)((Element) graphEdges.item(i)).getElementsByTagName("y:Arrows").item(0)).getAttribute("source");
-                int priority = arrow.equals("skewed_dash") ? 0 : 1;
-                edges.add(new Edge(source, target, priority));
+                edges.add(new Edge(source, target));
             }
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
@@ -102,9 +98,7 @@ public class GraphmlParser {
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         Document doc = dBuilder.parse(new File(filename));
         NodeList nodes = doc.getElementsByTagName("node");
-        for (int i = 0; i < nodes.getLength(); i++) {
 
-        }
         NodeList edges = doc.getElementsByTagName("edge");
         Files.delete(Paths.get("src/net/htlgrieskirchen/aud4/election/Files/edges.txt"));
         Files.createFile(Paths.get("src/net/htlgrieskirchen/aud4/election/Files/edges.txt"));
@@ -118,6 +112,4 @@ public class GraphmlParser {
             source = sourceSplit[1].replace("n", "");
         }
     }
-
-
 }
