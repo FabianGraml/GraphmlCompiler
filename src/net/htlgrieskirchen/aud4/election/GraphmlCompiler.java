@@ -66,10 +66,9 @@ public class GraphmlCompiler {
         if (firstNode.getNodeValue().equals("String[] votes")) {
             firstNode.setNodeValue(" ");
         }
-        if(firstNode.getNodeValue().contains("return")){
-            returnElse = false;
+        if(!firstNode.getNodeValue().contains("return")) {
+            writeLineToFile(firstNode.getNodeValue());
         }
-        writeLineToFile(firstNode.getNodeValue());
         firstNode.setNodeVisited(true);
         boolean setElse = true;
 
@@ -83,7 +82,7 @@ public class GraphmlCompiler {
                     codeBuilder(nextNode, returnElse);
                 }
                 if (returnElse) {
-                    if (firstNode.getNodeValue().startsWith("if") && codeList.get(firstNode).size() > 1) {
+                    if (firstNode.getNodeValue().startsWith("if") && codeList.get(firstNode).size() > 1&& (!firstNode.getNodeId().contains("n0::n7"))) {
                         if (setElse) {
                             writeLineToFile("}else { ");
                             setElse = false;
