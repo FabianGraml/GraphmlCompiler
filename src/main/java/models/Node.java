@@ -1,7 +1,6 @@
-package net.htlgrieskirchen.aud4.election;
+package models;
 
 public class Node {
-
     private String nodeId;
     private String nodeValue;
     private boolean nodeVisited;

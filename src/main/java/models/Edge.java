@@ -1,4 +1,4 @@
-package net.htlgrieskirchen.aud4.election;
+package models;
 
 public class Edge {
     private String edgeFrom;
